@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>dispvbn</RootNamespace>
+    <TargetFramework>net6.0-windows</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="rhubarb-geek-nz.Yarwood" Version="1.0.0" />
+    <PackageReference Include="rhubarb-geek-nz.AtYourService" Version="1.0.3" />
+  </ItemGroup>
+
+
+</Project>

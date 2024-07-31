@@ -1,0 +1,54 @@
+/***********************************
+ * Copyright (c) 2024 Roger Brown.
+ * Licensed under the MIT License.
+ ****/
+
+import "oaidl.idl"; 
+
+[
+	object,
+	uuid(d1e59313-47bc-4c75-9c0d-26ecb2652a01),
+	oleautomation,
+	dual,
+	helpstring("interface DIClientSecurity")
+]
+interface DIClientSecurity : IDispatch
+{
+	HRESULT QueryBlanket(
+		[in]IDispatch* pProxy,
+		[out]DWORD *pAuthnSvc,
+		[out]DWORD *pAuthzSvc,
+		[out]VARIANT *pServerPrincName,
+		[out]DWORD *pAuthnLevel,
+		[out]DWORD *pImpLevel,
+		[out]VARIANT* pAuthInfo,
+		[out]DWORD *pCapabilities);
+
+	HRESULT SetBlanket(
+		[in]IDispatch *pProxy,
+		[in]DWORD dwAuthnSvc,
+		[in]DWORD dwAuthzSvc,
+		[in]VARIANT *pServerPrincName,
+		[in]DWORD dwAuthnLevel,
+		[in]DWORD dwImpLevel,
+		[in]VARIANT *pAuthInfo,
+		[in]DWORD dwCapabilities);
+
+	HRESULT CopyProxy(
+		[in]IDispatch* pProxy,
+		[out, retval]IDispatch** ppCopy);
+}
+
+[
+	uuid(d4316c17-27b9-4cc5-83bc-f6a9e089e452)
+]
+library RhubarbGeekNzYarword
+{
+	importlib("stdole32.tlb");
+	interface DIClientSecurity;
+	[uuid(9b520c14-ea80-430a-a842-8ac36640ff09),helpstring("Client Security class")]
+	coclass CClientSecurity
+	{
+		[default] interface DIClientSecurity;
+	};
+}

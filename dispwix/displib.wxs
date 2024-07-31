@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="rhubarb-geek-nz/Yarwood ($(env.PRODUCTARCH))" Language="1033" Version="$(env.PRODUCTVERSION)" Manufacturer="rhubarb-geek-nz" UpgradeCode="$(env.UPGRADECODE)">
+    <Package InstallerVersion="$(env.INSTALLERVERSION)" Compressed="yes" InstallScope="perMachine" Platform="$(env.PRODUCTARCH)" Description="Dual-Interface Hello World Component" Comments="https://github.com/rhubarb-geek-nz/Yarwood" />
+    <MediaTemplate EmbedCab="yes" />
+    <Feature Id="ProductFeature" Title="setup" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+    <Upgrade Id="{$(env.UPGRADECODE)}">
+      <UpgradeVersion Maximum="$(env.PRODUCTVERSION)" Property="OLDPRODUCTFOUND" OnlyDetect="no" IncludeMinimum="yes" IncludeMaximum="no" />
+    </Upgrade>
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+    </InstallExecuteSequence>
+  </Product>
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="$(env.PRODUCTPROGFILES)">
+        <Directory Id="COMPANYDIR" Name="rhubarb-geek-nz">
+          <Directory Id="INSTALLDIR" Name="Yarwood">
+            <Directory Id="INSTALLDIRBIN" Name="$(env.PRODUCTARCH)" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="ProductComponents">
+      <Component Id="cmp49644F99A8DC013BD2FA39270E26C76C" Guid="*" Directory="INSTALLDIRBIN" Win64="$(env.PRODUCTWIN64)">
+        <File Id="fil206829A74DFF7880F64BE9D5C35CFF80" KeyPath="yes" Source="..\bin\$(env.PRODUCTARCH)\RhubarbGeekNzYarwood.dll">
+          <TypeLib Id="{D4316C17-27B9-4CC5-83BC-F6A9E089E452}" Description="RhubarbGeekNzYarword" HelpDirectory="INSTALLDIR" MajorVersion="0" MinorVersion="0" Language="0">
+            <Interface Id="{D1E59313-47BC-4C75-9C0D-26ECB2652A01}" Name="DIClientSecurity" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+          </TypeLib>
+        </File>
+        <RegistryValue Id="reg852b816e97fc40558f6085a82a262f7e" Root="HKCR" Key="CLSID\{9B520C14-EA80-430A-A842-8AC36640FF09}\InprocServer32" Value="[!fil206829A74DFF7880F64BE9D5C35CFF80]" Type="string" Action="write" />
+        <RegistryValue Id="reg852b816e97fc40558f6085a82a262f7f" Root="HKCR" Key="CLSID\{9B520C14-EA80-430A-A842-8AC36640FF09}\InprocServer32" Name="ThreadingModel" Value="Both" Type="string" Action="write" />
+        <RegistryValue Id="regc20ac5fc9e314d5cbf17c7fa18fd6e08" Root="HKCR" Key="RhubarbGeekNz.ClientSecurity\CLSID" Value="{9B520C14-EA80-430A-A842-8AC36640FF09}" Type="string" Action="write" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
